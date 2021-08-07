@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -102,5 +103,9 @@ dependencies {
 
     // progressbar
     implementation 'ir.sinadalvand.libs:tinyprogressbar:1.0.1'
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
 }

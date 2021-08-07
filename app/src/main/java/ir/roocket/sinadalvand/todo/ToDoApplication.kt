@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.work.Configuration
+import dagger.hilt.android.HiltAndroidApp
 import ir.roocket.sinadalvand.todo.data.workmanager.TaskWordManagerFactory
 import ir.roocket.sinadalvand.todo.di.TodoContainer
 
@@ -11,6 +12,7 @@ import ir.roocket.sinadalvand.todo.di.TodoContainer
  *  1- contain all object here
  *  2- implement Configuration.Provider for making instantiate of WorkManager
  */
+@HiltAndroidApp
 class ToDoApplication : Application(),Configuration.Provider {
 
     companion object {
