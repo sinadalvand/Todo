@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 
 class TodoContainer(val context: Context) {
 
-    val valutor = PrefValuetor()
+    val valutor = PrefValuetor(context)
 
     var session = SessionManager(valutor)
 

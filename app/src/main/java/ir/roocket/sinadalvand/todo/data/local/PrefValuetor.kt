@@ -2,6 +2,7 @@ package ir.roocket.sinadalvand.todo.data.local
 
 import android.content.Context
 import com.google.gson.GsonBuilder
+import dagger.hilt.android.qualifiers.ApplicationContext
 import ir.roocket.sinadalvand.todo.ToDoApplication
 import ir.roocket.sinadalvand.todo.data.model.User
 import javax.inject.Inject
@@ -10,11 +11,9 @@ import javax.inject.Inject
 /**
  * save value in sharedpreference
  */
-class PrefValuetor @Inject constructor() : Valutor {
+class PrefValuetor @Inject constructor(@ApplicationContext context: Context) : Valutor {
 
-    private val context = ToDoApplication.appContext
-
-    private val sp = context?.getSharedPreferences("app", Context.MODE_PRIVATE)
+    private val sp = context.getSharedPreferences("app", Context.MODE_PRIVATE)
 
     private val gson = GsonBuilder().create()
 
