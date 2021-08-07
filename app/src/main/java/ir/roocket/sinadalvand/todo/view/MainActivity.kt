@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import ir.roocket.sinadalvand.todo.R
 import ir.roocket.sinadalvand.todo.ToDoApplication
+import ir.roocket.sinadalvand.todo.data.local.PrefValuetor
+import ir.roocket.sinadalvand.todo.data.local.Valutor
 import ir.roocket.sinadalvand.todo.data.model.SubTask
 import ir.roocket.sinadalvand.todo.data.model.Task
 import ir.roocket.sinadalvand.todo.data.model.User
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     private lateinit var model: MainViewModel
 
+    private lateinit var valutor: Valutor
+
     private val recyclerAdapter = TaskRecyclerAdapter(this) {
         gotoTaskDetails(it)
     }
@@ -41,13 +45,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
         val container = (application as ToDoApplication).container
         model = MainViewModel(container.userRepo, container.taskRepo)
+        valutor = container.valutor
 
-
-        configWorkManager()
         textSwitcher()
 
         activity_main_recycler.adapter = recyclerAdapter
         activity_main_task_new.setOnClickListener(this)
+        activity_main_setting.setOnClickListener(this)
 
         model.user.observe(this) {
             it?.let {
@@ -67,8 +71,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     /* setup user to show details on top of screen*/
     private fun setupUser(user: User) {
-        Glide.with(this).load(user.imageUrl).apply(RequestOptions().error(R.mipmap.ic_launcher))
-            .into(activity_main_image)
+        Glide.with(this).load(user.imageUrl).apply(RequestOptions().error(R.mipmap.ic_launcher)).into(activity_main_image)
         activity_main_user_name.text = getString(R.string.hi_user, user.name)
     }
 
@@ -83,6 +86,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onResume() {
         super.onResume()
+
+        /* config cloud sync*/
+        configWorkManager(valutor)
 
         /* ger fresh task again */
         model.requestTasks()
@@ -109,25 +115,31 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     /**
      * set work manager to be sure every hour will sync your data
      */
-    private fun configWorkManager() {
+    private fun configWorkManager(valutor: Valutor) {
+       val workmanager =  WorkManager.getInstance(this)
+        lifecycleScope.launchWhenResumed {
+            if(valutor.isCloudOn()){
+                val uploadWorkRequest: PeriodicWorkRequest =
+                    PeriodicWorkRequestBuilder<TaskWorkManager>(2, TimeUnit.HOURS)
+                        .setConstraints(
+                            // sensitive to network connection
+                            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+                        ).build()
 
-        val uploadWorkRequest: PeriodicWorkRequest =
-            PeriodicWorkRequestBuilder<TaskWorkManager>(2, TimeUnit.HOURS)
-                .setConstraints(
-                    // sensitive to network connection
-                    Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-                ).build()
 
-        WorkManager
-            .getInstance(this)
-            .enqueueUniquePeriodicWork("syncer", ExistingPeriodicWorkPolicy.KEEP, uploadWorkRequest)
-
+                workmanager.enqueueUniquePeriodicWork("syncer", ExistingPeriodicWorkPolicy.KEEP, uploadWorkRequest)
+            }else
+                workmanager.cancelUniqueWork("syncer")
+        }
     }
 
     override fun onClick(v: View?) {
         when (v) {
             activity_main_task_new -> {
                 startActivity(Intent(this, TodoActivity::class.java))
+            }
+            activity_main_setting->{
+                startActivity(Intent(this, SettingsActivity::class.java))
             }
         }
 

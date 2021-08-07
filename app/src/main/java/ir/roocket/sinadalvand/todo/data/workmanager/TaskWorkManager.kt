@@ -38,7 +38,6 @@ open class TaskWorkManager(
     val gson = GsonBuilder().create()
 
     override suspend fun doWork(): Result {
-        Log.e("WorkManager", "Started")
         try {
             // get all not checked tasks
             val tasks = getNotUpdated()

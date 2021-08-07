@@ -18,6 +18,7 @@ class PrefValuetor : Valutor {
     private val gson = GsonBuilder().create()
 
     private val USER_KEY = "USER"
+    private val SYNC_KEY = "SYNC"
 
     override suspend fun saveUser(user: User) {
         sp?.edit()?.putString(USER_KEY, parse2String(user))?.apply()
@@ -28,6 +29,15 @@ class PrefValuetor : Valutor {
     override suspend fun removeUser() {
         sp?.edit()?.remove(USER_KEY)?.apply()
     }
+
+    override suspend fun isCloudOn(): Boolean {
+        return  sp?.getBoolean(SYNC_KEY, true) ?: true
+    }
+
+    override suspend fun cloudOn(on: Boolean) {
+        sp?.edit()?.putBoolean(SYNC_KEY,on)?.apply()
+    }
+
 
     private fun parse2String(user: User): String = gson.toJson(user, User::class.java)
 

@@ -9,6 +9,8 @@
         <entry key="..\:/Projects/Android/ToDo/app/src/main/res/drawable/shape_solid_edittext.xml" value="0.25885416666666666" />
         <entry key="..\:/Projects/Android/ToDo/app/src/main/res/layout/activity_auth.xml" value="0.1" />
         <entry key="..\:/Projects/Android/ToDo/app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
+        <entry key="..\:/Projects/Android/ToDo/app/src/main/res/layout/activity_setting.xml" value="0.24270833333333333" />
+        <entry key="..\:/Projects/Android/ToDo/app/src/main/res/layout/activity_settings.xml" value="0.22864583333333333" />
         <entry key="..\:/Projects/Android/ToDo/app/src/main/res/layout/activity_splash.xml" value="0.24270833333333333" />
         <entry key="..\:/Projects/Android/ToDo/app/src/main/res/layout/activity_todo.xml" value="0.24270833333333333" />
         <entry key="..\:/Projects/Android/ToDo/app/src/main/res/layout/fragment_login.xml" value="0.24270833333333333" />
@@ -20,7 +22,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="15" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

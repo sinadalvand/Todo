@@ -17,17 +17,20 @@
         android:theme="@style/Theme.ToDo"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.SettingsActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.AuthActivity"/>
-        <activity android:name=".view.TodoActivity"/>
-        <activity android:name=".view.MainActivity"/>
+        <activity android:name=".view.AuthActivity" />
+        <activity android:name=".view.TodoActivity" />
+        <activity android:name=".view.MainActivity" />
 
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"

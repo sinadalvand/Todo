@@ -22,4 +22,16 @@ class DbValutor(val userDao: UserDao) : Valutor {
         return userDao.delete()
     }
 
+    override suspend fun isCloudOn(): Boolean {
+        return getUser()?.could_sync?:true
+    }
+
+    override suspend fun cloudOn(on: Boolean) {
+        getUser().apply { cloudOn(on) }?.let {
+            saveUser(it)
+        }
+    }
+
+
+
 }

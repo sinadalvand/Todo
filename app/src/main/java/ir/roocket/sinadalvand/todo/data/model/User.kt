@@ -35,6 +35,10 @@ data class User(
     @SerializedName("token")
     var token: String? = null,
 
+    /* save user sync*/
+    @SerializedName("cloud")
+    var could_sync: Boolean = true,
+
     /* user password for register part*/
     @SerializedName("password")
     @Expose

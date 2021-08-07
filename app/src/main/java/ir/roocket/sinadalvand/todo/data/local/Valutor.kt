@@ -13,4 +13,7 @@ interface Valutor {
 
     suspend fun removeUser()
 
+    suspend fun isCloudOn(): Boolean
+
+    suspend fun cloudOn(on: Boolean)
 }
