@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_to_todoly"
+        android:text="@string/welcome_to_todo"
         android:textColor="@color/yellow_banana"
         android:textSize="@dimen/giant"
         app:layout_constraintBottom_toTopOf="@+id/appCompatImageView"
