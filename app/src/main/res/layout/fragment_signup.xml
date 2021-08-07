@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/pick_an_image"
+        android:textColor="@color/yellow_banana"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_signup_imageview_picker"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_signup_imageview_picker"
+        app:layout_constraintStart_toStartOf="@+id/fragment_signup_imageview_picker" />
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/fragment_signup_imageview_picker"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/pick_image"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_border_color="@color/yellow_banana"
+        app:riv_border_width="2dp"
+        app:riv_oval="true" />
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.55">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="-14dp"
+            android:paddingBottom="14dp"
+            app:cardBackgroundColor="@color/yellow_banana"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_solid_edittext"
+                    android:gravity="center_vertical"
+                    android:paddingTop="7dp"
+                    app:boxBackgroundMode="none"
+                    app:expandedHintEnabled="true"
+                    app:hintEnabled="true"
+                    app:startIconDrawable="@drawable/ic_person">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/fragment_signup_edittext_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:hint="@string/name" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="@string/age"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <it.sephiroth.android.library.numberpicker.NumberPicker
+                    android:id="@+id/fragment_signup_numberpicker_age"
+                    app:picker_arrowStyle="@style/NumberPicker.ArrowStyle"
+                    android:background="@drawable/shape_solid_edittext"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:progress="21"
+                    app:picker_max="70"
+                    app:picker_min="4"
+                    app:picker_orientation="vertical"
+                    app:picker_stepSize="1"
+                    app:picker_tracker="exponential" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/fragment_signup_button_submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/sign_up"
+                        app:backgroundTint="@color/white" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

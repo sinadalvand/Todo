@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ /**
+  ~  * Created by Sina Dalvand on 8/28/20 4:07 PM
+  ~  * Copyright (c) 2020 . All rights reserved.
+  ~  * Last modified 8/28/20 4:07 PM
+  ~  */
+  -->
+
+<resources>
+    <declare-styleable name="SubtaskIndicator">
+        <attr name="dot_fill_color" format="color" />
+        <attr name="dot_empty_color" format="color" />
+        <attr name="dot_radius" format="dimension" />
+        <attr name="dot_gap" format="dimension" />
+    </declare-styleable>
+</resources>

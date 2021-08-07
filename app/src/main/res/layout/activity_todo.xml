@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/activity_todo_container"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:expandedTitleGravity="top"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/activity_todo_task_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/title"
+                        android:maxLines="1"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/white_dirty"
+                        android:textColorHint="#60FFFFFF"
+                        android:textSize="20sp" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/activity_todo_task_delete"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/ic_delete"
+                        app:tint="@color/red_tomato" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/activity_todo_task_save"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.25"
+                        android:padding="6dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/ic_save"
+                        app:tint="@color/yellow_banana" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/activity_todo_task_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="start|top"
+                    android:hint="@string/description"
+                    android:lines="4"
+                    android:maxLines="5"
+                    android:minLines="5"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="@color/white_dirty"
+                    android:textColorHint="#40FFFFFF" />
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@color/carbon_dark"
+                        app:cardCornerRadius="7dp"
+                        app:cardElevation="7dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:orientation="horizontal"
+                                android:padding="8dp">
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:id="@+id/activity_todo_subtask_title"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@null"
+                                        android:ellipsize="end"
+                                        android:hint="@string/subtask_title"
+                                        android:maxLines="1"
+                                        android:textColor="@color/white"
+                                        android:textColorHint="#60FFFFFF"
+                                        android:textSize="18sp" />
+
+
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:id="@+id/activity_todo_subtask_description"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:alpha="0.7"
+                                        android:background="@null"
+                                        android:gravity="start|top"
+                                        android:hint="@string/subtask_description"
+                                        android:maxLines="2"
+                                        android:minLines="2"
+                                        android:textColor="@color/white"
+                                        android:textColorHint="#60FFFFFF"
+                                        android:textSize="15sp" />
+
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                            <RelativeLayout
+                                android:id="@+id/activity_todo_subtask_add"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/yellow_banana">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:drawableStart="@drawable/ic_add"
+                                    android:gravity="center"
+                                    android:text="Add SubTask"
+                                    app:drawableTint="@color/white" />
+
+                            </RelativeLayout>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_todo_recycler_subtask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.SplashActivity">
+
+    <com.hanks.htextview.typer.TyperTextView
+        android:id="@+id/activity_splash_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/let_s_manage_your_task"
+        android:textColor="@color/yellow_apple"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:charIncrease="1"
+        app:layout_constraintBottom_toTopOf="@+id/activity_splash_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:typerSpeed="20" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/activity_splash_logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        tools:src="@drawable/img_logo" />
+
+    <ir.sinadalvand.libs.tinyprogressbar.TinyProgressbar
+        android:id="@+id/tinyProgressbar"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:autoStart="true"
+        app:bgColor="#10FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_splash_logo"
+        app:progressColor="@color/yellow_apple" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="110dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/carbon_dark"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="7dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/item_recycler_subtask_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                app:srcCompat="@drawable/ic_delete"
+                app:tint="@color/red_tomato" />
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.hanks.library.AnimateCheckBox
+                    android:id="@+id/item_recycler_subtask_checkbox"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="15dp"
+                    app:animDuration="200"
+                    app:checkedColor="@color/yellow_banana"
+                    app:lineColor="@color/white"
+                    app:lineWidth="1.2dp"
+                    app:unCheckColor="@color/white_dirty" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="65dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/item_recycler_subtask_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Make some money for this"
+                        android:textSize="18sp" />
+
+
+                    <TextView
+                        android:id="@+id/item_recycler_subtask_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:alpha="0.7"
+                        android:maxLines="2"
+                        android:text="Make some money for this and evey body should try to use this function fro thest it"
+                        android:textSize="12sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

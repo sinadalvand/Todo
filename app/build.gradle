@@ -1,0 +1,106 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "ir.roocket.sinadalvand.todo"
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // KTx
+    implementation 'androidx.fragment:fragment-ktx:1.3.5'
+    implementation 'androidx.activity:activity-ktx:1.2.3'
+
+    // For Kotlin use Navigation Component Fragment
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
+
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    kapt 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'
+
+    // famous Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    // room
+    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation "androidx.room:room-ktx:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
+
+    // log tool
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // workmanager
+    implementation 'androidx.work:work-runtime-ktx:2.5.0'
+
+    // round image
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // number picker
+    implementation 'com.github.sephiroth74:NumberSlidingPicker:1.0.3'
+
+
+    // animated text
+    implementation "com.hanks:htextview-base:0.1.6"
+    implementation "com.hanks:htextview-scale:0.1.6"
+    implementation "com.hanks:htextview-typer:0.1.6"
+
+
+    // checkbox
+    implementation 'com.hanks.animatecheckbox:library:0.1'
+
+
+    // compress image
+    implementation 'com.github.yalantis:ucrop:2.2.6'
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    // progressbar
+    implementation 'ir.sinadalvand.libs:tinyprogressbar:1.0.1'
+
+}

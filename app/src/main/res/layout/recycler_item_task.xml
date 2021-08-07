@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="110dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/carbon_dark"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="7dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.hanks.library.AnimateCheckBox
+                android:id="@+id/item_recycler_task_checkbox"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="15dp"
+                app:animDuration="200"
+                android:layout_marginStart="8dp"
+                app:checkedColor="@color/yellow_banana"
+                app:lineColor="@color/white"
+                app:lineWidth="1.2dp"
+                app:unCheckColor="@color/white_dirty" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/item_recycler_task_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Make some money for this"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/item_recycler_task_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:alpha="0.7"
+                    android:maxLines="2"
+                    android:text="Make some money for this and evey body should try to use this function fro thest it"
+                    android:textSize="12sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <ir.roocket.sinadalvand.todo.view.customview.SubtaskIndicator
+                android:id="@+id/item_recycler_task_indicator"
+                app:dot_fill_color="@color/yellow_banana"
+                app:dot_empty_color="#50FFFFFF"
+                android:layout_width="15dp"
+                android:layout_height="match_parent" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

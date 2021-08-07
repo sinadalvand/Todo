@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ToDo</string>
+    <string name="welcome_to_todoly">Welcome to Todoly</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="Task">Task</string>
+    <string name="title">Title</string>
+    <string name="description">write your task description here</string>
+    <string name="subtask_title">Subtask Title</string>
+    <string name="subtask_description">subtask description</string>
+    <string name="hi_user">Hi, %s</string>
+    <string name="dialog1">"What's up? "</string>
+    <string name="dialog2">"Add new task!"</string>
+    <string name="dialog4">"have you completed your tasks?"</string>
+    <string name="dialog3">"What should we do today?"</string>
+    <string name="error">Error Occurred</string>
+    <string name="enter_email">Please enter your email</string>
+    <string name="enter_password">Please enter a password</string>
+    <string name="pick_an_image">Pick an Image</string>
+    <string name="choose_a_picture">Please choose a picture</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="how_old_are_you">How old are you?</string>
+    <string name="you_have_logged_in">You have logged in</string>
+    <string name="let_s_manage_your_task">Let\'s Manage your task</string>
+    <string name="retry">Retry</string>
+    <string name="must_not_be_empty">Title must not be empty</string>
+    <string name="try_to_add_some_new_task">Try to add some new task \n Let\'s do it ..</string>
+</resources>
