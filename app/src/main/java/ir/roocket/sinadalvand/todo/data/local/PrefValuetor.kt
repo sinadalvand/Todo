@@ -4,12 +4,13 @@ import android.content.Context
 import com.google.gson.GsonBuilder
 import ir.roocket.sinadalvand.todo.ToDoApplication
 import ir.roocket.sinadalvand.todo.data.model.User
+import javax.inject.Inject
 
 
 /**
  * save value in sharedpreference
  */
-class PrefValuetor : Valutor {
+class PrefValuetor @Inject constructor() : Valutor {
 
     private val context = ToDoApplication.appContext
 
