@@ -2,9 +2,12 @@ package ir.roocket.sinadalvand.todo.data.workmanager
 
 import android.content.Context
 import android.util.Log
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.google.gson.GsonBuilder
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import ir.roocket.sinadalvand.todo.data.model.Task
 import ir.roocket.sinadalvand.todo.data.model.UpdateTable
 import ir.roocket.sinadalvand.todo.data.persistence.TodoDatabase
@@ -24,9 +27,10 @@ import java.util.*
  * @property gson (com.google.gson.Gson..com.google.gson.Gson?)
  * @constructor
  */
-open class TaskWorkManager(
-    appContext: Context,
-    workerParams: WorkerParameters,
+@HiltWorker
+open class TaskWorkManager @AssistedInject constructor(
+    @Assisted appContext: Context,
+    @Assisted workerParams: WorkerParameters,
     val taskRepository: TaskRepository,
     val db: TodoDatabase,
     val api: TodoApiInterface,
@@ -65,7 +69,8 @@ open class TaskWorkManager(
      * @return List<Task>
      */
     private suspend fun getNotUpdated(): List<Task> {
-        val lastDate = updateDao.last()?.updateDate ?: Calendar.getInstance().time.apply { this.time = 0 }
+        val lastDate =
+            updateDao.last()?.updateDate ?: Calendar.getInstance().time.apply { this.time = 0 }
         return taskDao.getAll().filter { it.updatedAt?.after(lastDate) ?: true }
     }
 
@@ -76,13 +81,13 @@ open class TaskWorkManager(
      */
     private suspend fun addNewTask(tasks: List<Task>) {
         tasks.filter { !it.deleted }.forEach {
-            if(!it.deleted)
-            taskRepository.sendToServer(it).collect {response->
-                if (response.statusCode == 200) {
-                    it.sid = response.data?.sid
-                    taskDao.update(it)
+            if (!it.deleted)
+                taskRepository.sendToServer(it).collect { response ->
+                    if (response.statusCode == 200) {
+                        it.sid = response.data?.sid
+                        taskDao.update(it)
+                    }
                 }
-            }
         }
     }
 
@@ -95,7 +100,7 @@ open class TaskWorkManager(
             if (it.sid == null)
                 taskDao.delete(it)
             else {
-           taskRepository.deleteFromServer(it).collect{response->
+                taskRepository.deleteFromServer(it).collect { response ->
                     if (response.statusCode == 200) {
                         taskDao.delete(it)
                     }
