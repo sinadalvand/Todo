@@ -3,14 +3,20 @@ package ir.roocket.sinadalvand.todo.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.roocket.sinadalvand.todo.data.local.SessionManager
 import ir.roocket.sinadalvand.todo.data.model.Task
 import ir.roocket.sinadalvand.todo.repository.TaskRepository
 import ir.roocket.sinadalvand.todo.repository.UserRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(val userRepository: UserRepository, val taskRepository: TaskRepository) :
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    val userRepository: UserRepository,
+    val taskRepository: TaskRepository
+) :
     ViewModel() {
 
     val tasks = MutableLiveData<Array<Task>>()

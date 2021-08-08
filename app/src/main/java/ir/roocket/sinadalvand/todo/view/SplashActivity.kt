@@ -2,6 +2,7 @@ package ir.roocket.sinadalvand.todo.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +20,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
-    lateinit var model: SplashViewModel
+    private val model: SplashViewModel by viewModels()
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -27,8 +28,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        model = SplashViewModel(userRepository)
 
 
         Glide.with(this).load(R.drawable.img_logo).into(activity_splash_logo)

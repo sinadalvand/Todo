@@ -3,11 +3,14 @@ package ir.roocket.sinadalvand.todo.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.roocket.sinadalvand.todo.repository.UserRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SplashViewModel(private val userRepository: UserRepository) : ViewModel() {
+@HiltViewModel
+class SplashViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
     private val loggedin = MutableLiveData<Boolean>()
 

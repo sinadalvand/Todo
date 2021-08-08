@@ -2,6 +2,7 @@ package ir.roocket.sinadalvand.todo.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,7 @@ import javax.inject.Inject
 class TodoActivity : AppCompatActivity(), View.OnClickListener,
     SubTaskRecyclerAdapter.SubTaskClickListener {
 
-    private lateinit var model: TodoViewModel
+    private val model: TodoViewModel by viewModels()
 
     @Inject
     lateinit var taskRepository: TaskRepository
@@ -32,7 +33,6 @@ class TodoActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo)
 
-        model = TodoViewModel(taskRepository)
 
         val taskId = intent.extras?.getInt("task_id", -1) ?: -1
 
@@ -58,7 +58,7 @@ class TodoActivity : AppCompatActivity(), View.OnClickListener,
         }
 
         model.task.observe(this) {
-                setupTask(it)
+            setupTask(it)
         }
 
     }

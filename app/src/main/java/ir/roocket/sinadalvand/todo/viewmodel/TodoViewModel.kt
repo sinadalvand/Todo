@@ -3,14 +3,17 @@ package ir.roocket.sinadalvand.todo.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.roocket.sinadalvand.todo.data.model.SubTask
 import ir.roocket.sinadalvand.todo.data.model.Task
 import ir.roocket.sinadalvand.todo.data.persistence.dao.TaskDao
 import ir.roocket.sinadalvand.todo.repository.TaskRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TodoViewModel(private val taskRepo: TaskRepository) : ViewModel() {
+@HiltViewModel
+class TodoViewModel @Inject constructor(private val taskRepo: TaskRepository) : ViewModel() {
 
     val task = MutableLiveData(Task())
 

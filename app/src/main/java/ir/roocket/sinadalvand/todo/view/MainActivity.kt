@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.work.*
@@ -36,7 +37,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), View.OnClickListener,
     TaskRecyclerAdapter.TaskCompleteListener {
 
-    private lateinit var model: MainViewModel
+    private val model: MainViewModel by viewModels()
 
     @Inject
     lateinit var valutor: Valutor
@@ -54,8 +55,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        model = MainViewModel(userRepository,taskRepo)
 
 
         textSwitcher()
