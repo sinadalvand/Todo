@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toFile
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -31,14 +32,13 @@ import java.net.URI
 
 class SignupFragment : Fragment(), View.OnClickListener, NumberPicker.OnNumberPickerChangeListener {
 
-    private lateinit var model: AuthViewModel
+    val model: AuthViewModel by hiltNavGraphViewModels(R.id.auth_nav)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        model = (requireActivity() as AuthActivity).model
         return inflater.inflate(R.layout.fragment_signup, container, false)
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import ir.roocket.sinadalvand.todo.R
@@ -18,14 +19,13 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment(), View.OnClickListener {
 
-    lateinit var model: AuthViewModel
+    val model: AuthViewModel by hiltNavGraphViewModels(R.id.auth_nav)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        model = (requireActivity() as AuthActivity).model
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 

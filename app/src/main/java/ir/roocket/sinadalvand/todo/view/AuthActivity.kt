@@ -17,15 +17,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
 
-    lateinit var model: AuthViewModel
-
     @Inject
     lateinit var userRepo: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-
-        model = AuthViewModel(userRepo)
     }
 }
