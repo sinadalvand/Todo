@@ -15,6 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -22,6 +23,7 @@ class NetworkModule {
 
 
     @Provides
+    @Singleton
     fun provideOkHttp(session: SessionManager): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
@@ -47,6 +49,7 @@ class NetworkModule {
 
 
     @Provides
+    @Singleton
     fun provideRetrofit(okHttp: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(okHttp)
         .baseUrl("https://api-nodejs-todolist.herokuapp.com/")
@@ -56,6 +59,7 @@ class NetworkModule {
 
 
     @Provides
+    @Singleton
     fun provideAPiCall(retrofit: Retrofit): TodoApiInterface =
         retrofit.create(TodoApiInterface::class.java)
 }

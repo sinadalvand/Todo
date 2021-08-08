@@ -9,12 +9,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ir.roocket.sinadalvand.todo.data.local.PrefValuetor
 import ir.roocket.sinadalvand.todo.data.local.Valutor
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
 
     @Provides
+    @Singleton
     fun provideValutor(@ApplicationContext context: Context): Valutor =  PrefValuetor(context)
 
 }
