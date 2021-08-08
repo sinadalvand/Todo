@@ -16,9 +16,10 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import okhttp3.MultipartBody
+import javax.inject.Inject
 
 
-class UserRepository(val api: TodoApiInterface, val sessionManager: SessionManager) {
+class UserRepository @Inject constructor(val api: TodoApiInterface, val sessionManager: SessionManager) {
 
     fun login(email: String, password: String): Flow<Response<TokenContainer>> {
         val user = User().apply { this.email = email; this.password = password }

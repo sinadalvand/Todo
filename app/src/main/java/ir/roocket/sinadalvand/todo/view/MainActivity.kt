@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.work.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import dagger.hilt.android.AndroidEntryPoint
 import ir.roocket.sinadalvand.todo.R
 import ir.roocket.sinadalvand.todo.ToDoApplication
 import ir.roocket.sinadalvand.todo.data.local.PrefValuetor
@@ -17,6 +18,8 @@ import ir.roocket.sinadalvand.todo.data.model.SubTask
 import ir.roocket.sinadalvand.todo.data.model.Task
 import ir.roocket.sinadalvand.todo.data.model.User
 import ir.roocket.sinadalvand.todo.data.workmanager.TaskWorkManager
+import ir.roocket.sinadalvand.todo.repository.TaskRepository
+import ir.roocket.sinadalvand.todo.repository.UserRepository
 import ir.roocket.sinadalvand.todo.utils.Extension.invisible
 import ir.roocket.sinadalvand.todo.utils.Extension.visible
 import ir.roocket.sinadalvand.todo.view.adapter.TaskRecyclerAdapter
@@ -27,13 +30,22 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), View.OnClickListener,
     TaskRecyclerAdapter.TaskCompleteListener {
 
     private lateinit var model: MainViewModel
 
-    private lateinit var valutor: Valutor
+    @Inject
+    lateinit var valutor: Valutor
+
+    @Inject
+    lateinit var taskRepo: TaskRepository
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     private val recyclerAdapter = TaskRecyclerAdapter(this) {
         gotoTaskDetails(it)
@@ -43,9 +55,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val container = (application as ToDoApplication).container
-        model = MainViewModel(container.userRepo, container.taskRepo)
-        valutor = container.valutor
+        model = MainViewModel(userRepository,taskRepo)
+
 
         textSwitcher()
 
@@ -71,7 +82,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     /* setup user to show details on top of screen*/
     private fun setupUser(user: User) {
-        Glide.with(this).load(user.imageUrl).apply(RequestOptions().error(R.mipmap.ic_launcher)).into(activity_main_image)
+        Glide.with(this).load(user.imageUrl).apply(RequestOptions().error(R.mipmap.ic_launcher))
+            .into(activity_main_image)
         activity_main_user_name.text = getString(R.string.hi_user, user.name)
     }
 
@@ -116,19 +128,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
      * set work manager to be sure every hour will sync your data
      */
     private fun configWorkManager(valutor: Valutor) {
-       val workmanager =  WorkManager.getInstance(this)
+        val workmanager = WorkManager.getInstance(this)
         lifecycleScope.launchWhenResumed {
-            if(valutor.isCloudOn()){
+            if (valutor.isCloudOn()) {
                 val uploadWorkRequest: PeriodicWorkRequest =
                     PeriodicWorkRequestBuilder<TaskWorkManager>(2, TimeUnit.HOURS)
                         .setConstraints(
                             // sensitive to network connection
-                            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+                            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED)
+                                .build()
                         ).build()
 
 
-                workmanager.enqueueUniquePeriodicWork("syncer", ExistingPeriodicWorkPolicy.KEEP, uploadWorkRequest)
-            }else
+                workmanager.enqueueUniquePeriodicWork(
+                    "syncer",
+                    ExistingPeriodicWorkPolicy.KEEP,
+                    uploadWorkRequest
+                )
+            } else
                 workmanager.cancelUniqueWork("syncer")
         }
     }
@@ -138,7 +155,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             activity_main_task_new -> {
                 startActivity(Intent(this, TodoActivity::class.java))
             }
-            activity_main_setting->{
+            activity_main_setting -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
             }
         }
@@ -148,8 +165,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     override fun onTaskCompleteChange(task: Task) {
         model.taskUpdate(task)
     }
-
-
 
 
 }

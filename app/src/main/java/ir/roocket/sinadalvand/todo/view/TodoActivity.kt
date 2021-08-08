@@ -4,20 +4,27 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import dagger.hilt.android.AndroidEntryPoint
 import ir.roocket.sinadalvand.todo.R
 import ir.roocket.sinadalvand.todo.ToDoApplication
 import ir.roocket.sinadalvand.todo.data.model.SubTask
 import ir.roocket.sinadalvand.todo.data.model.Task
+import ir.roocket.sinadalvand.todo.repository.TaskRepository
 import ir.roocket.sinadalvand.todo.utils.Extension.snack
 import ir.roocket.sinadalvand.todo.utils.Extension.visible
 import ir.roocket.sinadalvand.todo.view.adapter.SubTaskRecyclerAdapter
 import ir.roocket.sinadalvand.todo.viewmodel.TodoViewModel
 import kotlinx.android.synthetic.main.activity_todo.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TodoActivity : AppCompatActivity(), View.OnClickListener,
     SubTaskRecyclerAdapter.SubTaskClickListener {
 
     private lateinit var model: TodoViewModel
+
+    @Inject
+    lateinit var taskRepository: TaskRepository
 
     private val adapter = SubTaskRecyclerAdapter(this)
 
@@ -25,8 +32,7 @@ class TodoActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo)
 
-        val container = (application as ToDoApplication).container
-        model = TodoViewModel(container.taskRepo)
+        model = TodoViewModel(taskRepository)
 
         val taskId = intent.extras?.getInt("task_id", -1) ?: -1
 

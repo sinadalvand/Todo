@@ -5,13 +5,15 @@ import ir.roocket.sinadalvand.todo.data.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class SessionManager() {
 
     private var valutor: Valutor? = null
 
-    constructor(valutor: Valutor):this()  {
-        this.valutor= valutor
+    @Inject
+    constructor(valutor: Valutor) : this() {
+        this.valutor = valutor
         CoroutineScope(Dispatchers.Unconfined).launch {
             valutor.getUser()?.let {
                 token.value = it.token
@@ -19,7 +21,6 @@ class SessionManager() {
             }
         }
     }
-
 
 
     var token = MutableLiveData<String?>()

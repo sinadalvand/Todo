@@ -1,14 +1,11 @@
 package ir.roocket.sinadalvand.todo.di
 
-import android.content.Context
-import android.util.Log
-import ir.roocket.sinadalvand.todo.data.local.PrefValuetor
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import ir.roocket.sinadalvand.todo.data.local.SessionManager
-import ir.roocket.sinadalvand.todo.data.persistence.TodoDatabase
 import ir.roocket.sinadalvand.todo.data.remote.TodoApiInterface
-import ir.roocket.sinadalvand.todo.repository.TaskRepository
-import ir.roocket.sinadalvand.todo.repository.UserRepository
-import kotlinx.coroutines.delay
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -19,13 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
-class TodoContainer(val context: Context) {
+@Module
+@InstallIn(SingletonComponent::class)
+class NetworkModule {
 
-    val valutor = PrefValuetor(context)
 
-    var session = SessionManager(valutor)
-
-    private val okHttp = OkHttpClient.Builder()
+    @Provides
+    fun provideOkHttp(session: SessionManager): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
                 val original: Request = chain.request()
@@ -48,22 +45,17 @@ class TodoContainer(val context: Context) {
         .readTimeout(10, TimeUnit.SECONDS)
         .build()
 
-    private val retrofit = Retrofit.Builder()
+
+    @Provides
+    fun provideRetrofit(okHttp: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(okHttp)
         .baseUrl("https://api-nodejs-todolist.herokuapp.com/")
         .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    val todoApiCall = retrofit.create(TodoApiInterface::class.java)
 
 
-    val database = TodoDatabase.create(context)
-    val taskDao = database.taskDao()
-    val userDao = database.userDao()
-
-
-    val userRepo = UserRepository(todoApiCall, session)
-    val taskRepo = TaskRepository(todoApiCall, taskDao)
-
-
+    @Provides
+    fun provideAPiCall(retrofit: Retrofit): TodoApiInterface =
+        retrofit.create(TodoApiInterface::class.java)
 }

@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.single
+import javax.inject.Inject
 
-class TaskRepository(val api: TodoApiInterface, val taskDao: TaskDao) {
+class TaskRepository @Inject constructor(val api: TodoApiInterface, val taskDao: TaskDao) {
 
 
     /**
@@ -36,7 +37,7 @@ class TaskRepository(val api: TodoApiInterface, val taskDao: TaskDao) {
         if (tasks.isNullOrEmpty()) {
             val onlineTask = api.all()
             onlineTask.data?.forEach {
-                it.task?.let { task->
+                it.task?.let { task ->
                     taskDao.insert(task)
                 }
             }
@@ -93,7 +94,7 @@ class TaskRepository(val api: TodoApiInterface, val taskDao: TaskDao) {
             val jsonTask = task.toJsonString().toJsonString()
             var result: TaskActionContainer<TaskContainer>? = null
             result = if (task.sid != null) {
-                api.update(task.sid!!,""" {"description":$jsonTask}   """)
+                api.update(task.sid!!, """ {"description":$jsonTask}   """)
             } else {
                 api.add(""" {"description":$jsonTask}   """)
             }
@@ -104,7 +105,7 @@ class TaskRepository(val api: TodoApiInterface, val taskDao: TaskDao) {
     fun deleteFromServer(task: Task): Flow<Response<Boolean>> {
         return flow {
             if (task.sid != null) {
-               api.remove(task.sid!!)
+                api.remove(task.sid!!)
                 emit(true)
             } else
                 emit(false)
