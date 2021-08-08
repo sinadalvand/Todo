@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.roocket.sinadalvand.todo.data.local.SessionManager
 import ir.roocket.sinadalvand.todo.data.remote.TodoApiInterface
+import ir.roocket.sinadalvand.todo.di.qualifier.BodyIntercept
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -21,10 +22,25 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
+    @Provides
+    fun provideInterceptHeader(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.HEADERS
+    }
+
+    @Provides
+    @BodyIntercept
+    fun provideInterceptBody(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
 
     @Provides
     @Singleton
-    fun provideOkHttp(session: SessionManager): OkHttpClient = OkHttpClient.Builder()
+    fun provideOkHttp(
+        header: HttpLoggingInterceptor,
+        @BodyIntercept body: HttpLoggingInterceptor,
+        session: SessionManager
+
+    ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
                 val original: Request = chain.request()
@@ -37,12 +53,8 @@ class NetworkModule {
                 return chain.proceed(request)
             }
         })
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.HEADERS
-        })
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        })
+        .addInterceptor(header)
+        .addInterceptor(body)
         .connectTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)
         .build()
