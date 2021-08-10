@@ -1,4 +1,4 @@
-# ✔ Todo
+# ✔ Todo <img src="art/roocket.png" width="130"/>
 
 Simple Todo List application that using Hilt for DI [Hilt](https://github.com/google/dagger).
 
