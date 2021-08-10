@@ -1,4 +1,4 @@
-# 🍔 McCompose
+# ✔ Todo
 
 Simple Todo List application that using Hilt for DI [Hilt](https://github.com/google/dagger).
 
